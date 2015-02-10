@@ -1,0 +1,37 @@
+﻿@model Pharmacy.Models.ClientVisitsmodel
+
+@{
+    ViewBag.Title = "VisitList";
+}
+
+<h2>VisitList</h2>
+<p>@Html.ActionLink("Create new?", "Create", "Visit", new { Model.ClientId }, null)</p>
+
+<table class="table">
+    <tr>
+        <th>Visit date</th>
+        <th>Order amount</th>
+        <th>Order status</th>
+        <th>Actions</th>
+    </tr>
+    
+    @foreach (var item in Model.VisitDataList)
+    {      
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Visit", new { item.Id } , null) |
+                @Html.ActionLink("Delete", "Delete", "Visit", item, null)
+            </td>
+        </tr>
+    }
+</table>
+

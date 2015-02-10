@@ -1,0 +1,53 @@
+﻿@model Pharmacy.Models.ClientSearchModel
+
+@{
+    ViewBag.Title = "FindClient";
+}
+
+<h2>FindClient</h2>
+
+@using (Html.BeginForm("FindClient", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>ClientData</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SearchingClientData.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SearchingClientData.FirstName)
+        </div>
+            
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SearchingClientData.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SearchingClientData.LastName)
+        </div>
+               
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SearchingClientData.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SearchingClientData.Email)
+        </div>     
+        <input type="submit" value="Find" />                      
+    </fieldset>
+}
+<br/>
+@if ((Model.ClientResultList.ClientList != null)&&(Model.ClientResultList.ClientList.Count != 0))
+{
+    <p>
+        @Html.Partial("_ClientListPartial", Model.ClientResultList);
+    </p>
+}
+else
+{
+    <p>
+        @if (Model.SearchStatus)
+        {
+            <text>Nothing found.</text>
+        }
+        @Html.ActionLink("Create new?", "Create", "Home")
+    </p>
+}

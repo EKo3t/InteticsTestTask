@@ -1,0 +1,46 @@
+﻿@model Pharmacy.Models.ChangeVisitModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Visit", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.VisitData.Id)
+    @Html.HiddenFor(model => model.VisitData.ClientId)
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend></legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VisitData.VisitDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VisitData.VisitDate)
+            @Html.ValidationMessageFor(model => model.VisitData.VisitDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VisitData.OrderAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VisitData.OrderAmount)
+            @Html.ValidationMessageFor(model => model.VisitData.OrderAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VisitData.OrderStatus)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.VisitData.OrderStatus, Model.StatusList)
+            @Html.ValidationMessageFor(model => model.VisitData.OrderStatus)
+        </div>
+
+        <input type="submit" value="Edit visit" />
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to visit list", "VisitList", "Client", new { Model.VisitData.ClientId }, null)
+</div>

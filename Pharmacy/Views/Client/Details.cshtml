@@ -1,0 +1,78 @@
+﻿@model Pharmacy.Models.ClientDetailsModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title about client</h2>
+
+<fieldset>
+    <legend></legend>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MainData.FirstName)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.MainData.FirstName, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.MainData.FirstName)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MainData.LastName)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.MainData.LastName, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.MainData.LastName)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.MainData.Email)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.MainData.Email, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.MainData.Email)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.OtherData.Address)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.OtherData.Address, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.OtherData.Address)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.OtherData.BirthDate)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.OtherData.BirthDate, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.OtherData.BirthDate)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.OtherData.Phone)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.OtherData.Phone, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.OtherData.Phone)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.EyeData.LeftEye)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.EyeData.LeftEye, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.EyeData.LeftEye)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.EyeData.RightEye)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(model => model.EyeData.RightEye, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model.EyeData.RightEye)
+    </div>
+    
+    <div>
+        @Html.ActionLink("Back to clients list", "Clients", "Home")
+    </div>
+</fieldset>
+

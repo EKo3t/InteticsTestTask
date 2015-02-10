@@ -1,0 +1,80 @@
+﻿@model Pharmacy.Models.CreateClientModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend></legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MainData.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MainData.FirstName)
+            @Html.ValidationMessageFor(model => model.MainData.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MainData.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MainData.LastName)
+            @Html.ValidationMessageFor(model => model.MainData.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MainData.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MainData.Email)
+            @Html.ValidationMessageFor(model => model.MainData.Email)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OtherData.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OtherData.Address)
+            @Html.ValidationMessageFor(model => model.OtherData.Address)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OtherData.BirthDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OtherData.BirthDate)
+            @Html.ValidationMessageFor(model => model.OtherData.BirthDate)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OtherData.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OtherData.Phone)
+            @Html.ValidationMessageFor(model => model.OtherData.Phone)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EyeData.LeftEye)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EyeData.LeftEye)
+            @Html.ValidationMessageFor(model => model.EyeData.LeftEye)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EyeData.RightEye)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EyeData.RightEye)
+            @Html.ValidationMessageFor(model => model.EyeData.RightEye)
+        </div>
+
+        <input type="submit" value="Create" />
+    </fieldset>
+}

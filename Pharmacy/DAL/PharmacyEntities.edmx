@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище PharmacyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EyeClientData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeftEye" Type="int" />
+          <Property Name="RightEye" Type="int" />
+          <Property Name="ClientId" Type="int" />
+        </EntityType>
+        <EntityType Name="MainClientData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OtherClientData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="ClientId" Type="int" />
+        </EntityType>
+        <EntityType Name="VisitData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VisitDate" Type="datetime" />
+          <Property Name="OrderAmount" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="OrderStatus" Type="nvarchar" MaxLength="20" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="Removed" Type="bit" />
+        </EntityType>
+        <Association Name="FK_EyeClientData_EyeClientData">
+          <End Role="MainClientData" Type="Self.MainClientData" Multiplicity="0..1" />
+          <End Role="EyeClientData" Type="Self.EyeClientData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainClientData">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EyeClientData">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherClientData_MainClientData">
+          <End Role="MainClientData" Type="Self.MainClientData" Multiplicity="0..1" />
+          <End Role="OtherClientData" Type="Self.OtherClientData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainClientData">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OtherClientData">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VisitData_VisitData">
+          <End Role="MainClientData" Type="Self.MainClientData" Multiplicity="0..1" />
+          <End Role="VisitData" Type="Self.VisitData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainClientData">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VisitData">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PharmacyModelContainer">
+          <EntitySet Name="EyeClientData" EntityType="Self.EyeClientData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MainClientData" EntityType="Self.MainClientData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtherClientData" EntityType="Self.OtherClientData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitData" EntityType="Self.VisitData" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EyeClientData_EyeClientData" Association="Self.FK_EyeClientData_EyeClientData">
+            <End Role="MainClientData" EntitySet="MainClientData" />
+            <End Role="EyeClientData" EntitySet="EyeClientData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherClientData_MainClientData" Association="Self.FK_OtherClientData_MainClientData">
+            <End Role="MainClientData" EntitySet="MainClientData" />
+            <End Role="OtherClientData" EntitySet="OtherClientData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VisitData_VisitData" Association="Self.FK_VisitData_VisitData">
+            <End Role="MainClientData" EntitySet="MainClientData" />
+            <End Role="VisitData" EntitySet="VisitData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PharmacyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PharmacyEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="EyeClientDatas" EntityType="PharmacyModel.EyeClientData" />
+          <EntitySet Name="MainClientDatas" EntityType="PharmacyModel.MainClientData" />
+          <EntitySet Name="OtherClientDatas" EntityType="PharmacyModel.OtherClientData" />
+          <AssociationSet Name="FK_EyeClientData_EyeClientData" Association="PharmacyModel.FK_EyeClientData_EyeClientData">
+            <End Role="MainClientData" EntitySet="MainClientDatas" />
+            <End Role="EyeClientData" EntitySet="EyeClientDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherClientData_MainClientData" Association="PharmacyModel.FK_OtherClientData_MainClientData">
+            <End Role="MainClientData" EntitySet="MainClientDatas" />
+            <End Role="OtherClientData" EntitySet="OtherClientDatas" />
+          </AssociationSet>
+          <EntitySet Name="VisitDatas" EntityType="PharmacyModel.VisitData" />
+          <AssociationSet Name="FK_VisitData_VisitData1" Association="PharmacyModel.FK_VisitData_VisitData1">
+            <End Role="MainClientData" EntitySet="MainClientDatas" />
+            <End Role="VisitData" EntitySet="VisitDatas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="EyeClientData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeftEye" Type="Int32" />
+          <Property Name="RightEye" Type="Int32" />
+          <Property Name="ClientId" Type="Int32" />
+          <NavigationProperty Name="MainClientData" Relationship="PharmacyModel.FK_EyeClientData_EyeClientData" FromRole="EyeClientData" ToRole="MainClientData" />
+        </EntityType>
+        <EntityType Name="MainClientData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EyeClientDatas" Relationship="PharmacyModel.FK_EyeClientData_EyeClientData" FromRole="MainClientData" ToRole="EyeClientData" />
+          <NavigationProperty Name="OtherClientDatas" Relationship="PharmacyModel.FK_OtherClientData_MainClientData" FromRole="MainClientData" ToRole="OtherClientData" />
+          <NavigationProperty Name="VisitDatas" Relationship="PharmacyModel.FK_VisitData_VisitData1" FromRole="MainClientData" ToRole="VisitData" />
+        </EntityType>
+        <EntityType Name="OtherClientData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="Int32" />
+          <NavigationProperty Name="MainClientData" Relationship="PharmacyModel.FK_OtherClientData_MainClientData" FromRole="OtherClientData" ToRole="MainClientData" />
+        </EntityType>
+        <Association Name="FK_EyeClientData_EyeClientData">
+          <End Type="PharmacyModel.MainClientData" Role="MainClientData" Multiplicity="0..1" />
+          <End Type="PharmacyModel.EyeClientData" Role="EyeClientData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainClientData">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EyeClientData">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherClientData_MainClientData">
+          <End Type="PharmacyModel.MainClientData" Role="MainClientData" Multiplicity="0..1" />
+          <End Type="PharmacyModel.OtherClientData" Role="OtherClientData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainClientData">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OtherClientData">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VisitData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderAmount" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="OrderStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="Int32" />
+          <NavigationProperty Name="MainClientData" Relationship="PharmacyModel.FK_VisitData_VisitData1" FromRole="VisitData" ToRole="MainClientData" />
+          <Property Name="Removed" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_VisitData_VisitData1">
+          <End Type="PharmacyModel.MainClientData" Role="MainClientData" Multiplicity="0..1" />
+          <End Type="PharmacyModel.VisitData" Role="VisitData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MainClientData">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VisitData">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PharmacyModelContainer" CdmEntityContainer="PharmacyEntities" >
+          <EntitySetMapping Name="EyeClientDatas">
+            <EntityTypeMapping TypeName="PharmacyModel.EyeClientData">
+              <MappingFragment StoreEntitySet="EyeClientData">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="RightEye" ColumnName="RightEye" />
+                <ScalarProperty Name="LeftEye" ColumnName="LeftEye" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainClientDatas">
+            <EntityTypeMapping TypeName="PharmacyModel.MainClientData">
+              <MappingFragment StoreEntitySet="MainClientData">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherClientDatas">
+            <EntityTypeMapping TypeName="PharmacyModel.OtherClientData">
+              <MappingFragment StoreEntitySet="OtherClientData">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitDatas">
+            <EntityTypeMapping TypeName="PharmacyModel.VisitData">
+              <MappingFragment StoreEntitySet="VisitData">
+                <ScalarProperty Name="Removed" ColumnName="Removed" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="OrderAmount" ColumnName="OrderAmount" />
+                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,8 @@
+1. Open SQL Server. 
+2. Open the PharmacyScript.sql in it.
+3. Create Table named Pharmacy on server.
+4. Run script.
+5. Run .sln file in project
+6. Check your sql server name and change it in web.config if it needs.
+Check the "connectionstring" tag.
+7. Run(f5).Nuget will restore all packages.
